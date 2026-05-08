@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'idonnno',
-  description: 'idonno is a tool that do idonno',
+  description: 'idonnno is a idonnno that idonnno idonnno',
 };
 
 export default function RootLayout({
