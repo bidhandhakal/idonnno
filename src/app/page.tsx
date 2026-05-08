@@ -1,7 +1,13 @@
-import Image from "next/image";
+import { headers } from "next/headers";
+import { UselessCounterClient } from "./useless-counter-client";
 
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center">lame</div>
-  );
+export default async function Home() {
+  const h = await headers();
+  const country =
+    h.get("x-vercel-ip-country") ??
+    h.get("x-country") ??
+    h.get("cf-ipcountry") ??
+    "??";
+
+  return <UselessCounterClient initialCountry={country} />;
 }
