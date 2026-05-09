@@ -1,5 +1,5 @@
 import { headers } from "next/headers";
-import { UselessCounterClient } from "./useless-counter-client";
+import { UselessCounterClient } from "@/components/useless-counter";
 
 export default async function Home() {
   const h = await headers();
