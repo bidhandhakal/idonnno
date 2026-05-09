@@ -10,6 +10,7 @@ export { CounterHeader } from './counter-header';
 export { CounterHero } from './counter-hero';
 export { PressButton } from './press-button';
 export { TopCountriesPanel } from './top-countries-panel';
+export { CountriesLeaderboardModal } from './countries-leaderboard-modal';
 export { MilestonesPanel } from './milestones-panel';
 export { MilestoneModal } from './milestone-modal';
 export { ConfettiBurst, makeConfettiPieces } from './confetti-burst';

@@ -33,7 +33,7 @@ export const getTopCountries = query({
     limit: v.number(),
   },
   handler: async (ctx, args) => {
-    const limit = Math.max(1, Math.min(20, Math.floor(args.limit)));
+    const limit = Math.max(1, Math.min(500, Math.floor(args.limit)));
     const rows = await ctx.db
       .query("countries")
       .withIndex("by_count_and_country")

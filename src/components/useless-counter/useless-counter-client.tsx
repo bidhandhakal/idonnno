@@ -11,11 +11,15 @@ import { CounterHero } from './counter-hero';
 import { MilestoneModal } from './milestone-modal';
 import { MilestonesPanel } from './milestones-panel';
 import { PressButton } from './press-button';
+import { CountriesLeaderboardModal } from './countries-leaderboard-modal';
 import { TopCountriesPanel } from './top-countries-panel';
 import type { ConfettiPiece, CountryStat } from './types';
 import { clampCountry } from './lib/country';
 import { getOrCreateSessionId } from './lib/session';
 import { readTodayPresses, writeTodayPresses } from './lib/today-presses';
+
+const TOP_COUNTRIES_PREVIEW = 5;
+const COUNTRIES_QUERY_LIMIT = 500;
 
 export function UselessCounterClient({
   initialCountry,
@@ -27,7 +31,9 @@ export function UselessCounterClient({
 
   const counter = useQuery(api.counter.getCounter);
   const online = useQuery(api.presence.getOnlineCount);
-  const topCountries = useQuery(api.countries.getTopCountries, { limit: 8 });
+  const topCountries = useQuery(api.countries.getTopCountries, {
+    limit: COUNTRIES_QUERY_LIMIT,
+  });
 
   const increment = useMutation(api.counter.incrementCounter);
   const heartbeat = useMutation(api.presence.heartbeat);
@@ -130,6 +136,9 @@ export function UselessCounterClient({
     country: c.country,
     count: c.count,
   }));
+  const countriesPreview = countries.slice(0, TOP_COUNTRIES_PREVIEW);
+
+  const [countriesModalOpen, setCountriesModalOpen] = useState(false);
 
   return (
     <main className="relative flex flex-1 items-center justify-center px-4 py-10 select-none">
@@ -138,6 +147,11 @@ export function UselessCounterClient({
         open={milestoneOpen}
         milestone={milestoneValue}
         onClose={() => setMilestoneOpen(false)}
+      />
+      <CountriesLeaderboardModal
+        open={countriesModalOpen}
+        countries={countries}
+        onClose={() => setCountriesModalOpen(false)}
       />
 
       <div className="w-full max-w-3xl">
@@ -153,7 +167,11 @@ export function UselessCounterClient({
         <PressButton controls={controls} onPress={onPress} />
 
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <TopCountriesPanel countries={countries} />
+          <TopCountriesPanel
+            previewCountries={countriesPreview}
+            totalWithData={countries.length}
+            onOpenFull={() => setCountriesModalOpen(true)}
+          />
           <MilestonesPanel displayedCount={displayedCount} />
         </div>
 
