@@ -8,8 +8,8 @@ export function CounterHero({
   todayPresses: number;
 }) {
   return (
-    <div className="mb-6 text-center">
-      <div className="text-[50px] leading-none font-semibold tracking-tight text-black sm:text-[72px] md:text-[92px]">
+    <div className="mb-6 w-full text-center">
+      <div className="text-[50px] leading-none font-semibold tracking-tight text-black tabular-nums sm:text-[72px] md:text-[92px]">
         {hasServerCount ? (
           displayedCount.toLocaleString()
         ) : (

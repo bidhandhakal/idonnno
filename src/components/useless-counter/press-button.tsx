@@ -15,7 +15,7 @@ export function PressButton({
   const enterLockRef = useRef(false);
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
       <motion.div animate={controls} className="select-none">
         <Button
           onClick={onPress}
@@ -45,6 +45,9 @@ export function PressButton({
           Click me
         </Button>
       </motion.div>
+      <p className="mt-2 text-center text-xs text-slate-500">
+        Click, enter, or space to press
+      </p>
     </div>
   );
 }
