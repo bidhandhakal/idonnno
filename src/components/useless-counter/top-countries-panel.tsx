@@ -1,4 +1,8 @@
 import type { CountryStat } from './types';
+import {
+  countryCodeToDisplayName,
+  shouldShowCountryCodeSubtitle,
+} from './lib/country-display-name';
 import { countryCodeToFlagEmoji } from './lib/flag-emoji';
 
 export function TopCountriesPanel({
@@ -38,22 +42,33 @@ export function TopCountriesPanel({
           </div>
         ) : (
           <>
-            {previewCountries.map((c) => (
-              <div
-                key={c.country}
-                className="flex items-center justify-between text-sm"
-              >
-                <div className="flex items-center gap-2 font-medium text-white/85">
-                  <span className="text-lg leading-none" aria-hidden>
-                    {countryCodeToFlagEmoji(c.country)}
-                  </span>
-                  <span className="tabular-nums">{c.country}</span>
+            {previewCountries.map((c) => {
+              const name = countryCodeToDisplayName(c.country);
+              const showCode = shouldShowCountryCodeSubtitle(name, c.country);
+              return (
+                <div
+                  key={c.country}
+                  className="flex items-center justify-between gap-2 text-sm"
+                >
+                  <div className="flex min-w-0 flex-1 items-center gap-2 font-medium text-white/85">
+                    <span className="text-lg leading-none" aria-hidden>
+                      {countryCodeToFlagEmoji(c.country)}
+                    </span>
+                    <span className="min-w-0 leading-tight">
+                      <span className="block truncate">{name}</span>
+                      {showCode && (
+                        <span className="block truncate text-xs font-normal text-white/45 tabular-nums">
+                          {c.country}
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                  <div className="shrink-0 tabular-nums text-white/60">
+                    {c.count.toLocaleString()}
+                  </div>
                 </div>
-                <div className="tabular-nums text-white/60">
-                  {c.count.toLocaleString()}
-                </div>
-              </div>
-            ))}
+              );
+            })}
             {showViewAllHint && (
               <div className="pt-1 text-xs text-white/40">
                 + {(totalWithData - previewCountries.length).toLocaleString()}{' '}

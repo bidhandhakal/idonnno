@@ -3,6 +3,10 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import type { CountryStat } from './types';
+import {
+  countryCodeToDisplayName,
+  shouldShowCountryCodeSubtitle,
+} from './lib/country-display-name';
 import { countryCodeToFlagEmoji } from './lib/flag-emoji';
 
 export function CountriesLeaderboardModal({
@@ -50,25 +54,36 @@ export function CountriesLeaderboardModal({
 
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-3">
           <ul className="space-y-1">
-            {countries.map((c, i) => (
-              <li
-                key={c.country}
-                className="flex items-center justify-between gap-3 rounded-lg px-2 py-2 text-sm text-white/85 hover:bg-white/5"
-              >
-                <div className="flex min-w-0 flex-1 items-center gap-2">
-                  <span className="w-6 shrink-0 tabular-nums text-xs text-white/45">
-                    {i + 1}
+            {countries.map((c, i) => {
+              const name = countryCodeToDisplayName(c.country);
+              const showCode = shouldShowCountryCodeSubtitle(name, c.country);
+              return (
+                <li
+                  key={c.country}
+                  className="flex items-center justify-between gap-3 rounded-lg px-2 py-2 text-sm text-white/85 hover:bg-white/5"
+                >
+                  <div className="flex min-w-0 flex-1 items-center gap-2">
+                    <span className="w-6 shrink-0 tabular-nums text-xs text-white/45">
+                      {i + 1}
+                    </span>
+                    <span className="text-lg leading-none" aria-hidden>
+                      {countryCodeToFlagEmoji(c.country)}
+                    </span>
+                    <span className="min-w-0 leading-tight">
+                      <span className="block truncate font-medium">{name}</span>
+                      {showCode && (
+                        <span className="block truncate text-xs font-normal text-white/45 tabular-nums">
+                          {c.country}
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                  <span className="shrink-0 tabular-nums text-white/60">
+                    {c.count.toLocaleString()}
                   </span>
-                  <span className="text-lg leading-none" aria-hidden>
-                    {countryCodeToFlagEmoji(c.country)}
-                  </span>
-                  <span className="truncate font-medium">{c.country}</span>
-                </div>
-                <span className="shrink-0 tabular-nums text-white/60">
-                  {c.count.toLocaleString()}
-                </span>
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ul>
         </div>
 
