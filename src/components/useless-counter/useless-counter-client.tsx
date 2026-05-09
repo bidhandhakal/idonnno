@@ -114,33 +114,43 @@ export function UselessCounterClient({
   const [countriesModalOpen, setCountriesModalOpen] = useState(false);
 
   return (
-    <main className="relative flex flex-1 items-center justify-center px-4 py-10 select-none">
+    <main className="relative flex flex-1 justify-center bg-slate-50 px-3 text-slate-900 select-none sm:px-5 lg:px-6">
       <CountriesLeaderboardModal
         open={countriesModalOpen}
         countries={countries}
         onClose={() => setCountriesModalOpen(false)}
       />
 
-      <div className="w-full max-w-3xl">
-        <CounterHeader country={country} onlineCount={online?.count ?? 0} />
-        <CounterHero
-          hasServerCount={hasServerCount}
-          displayedCount={displayedCount}
-          todayPresses={todayPresses}
-        />
-        <PressButton controls={controls} onPress={onPress} />
+      <div className="grid w-full max-w-[1260px] grid-cols-1 gap-4 lg:grid-cols-[260px_minmax(0,640px)_320px] lg:gap-0">
+        <aside className="hidden lg:block" />
 
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <TopCountriesPanel
-            previewCountries={countriesPreview}
-            totalWithData={countries.length}
-            onOpenFull={() => setCountriesModalOpen(true)}
+        <section className="min-w-0 border-x border-slate-200 px-3 py-4 sm:px-5">
+          <CounterHeader country={country} onlineCount={online?.count ?? 0} />
+          <CounterHero
+            hasServerCount={hasServerCount}
+            displayedCount={displayedCount}
+            todayPresses={todayPresses}
           />
-        </div>
+          <PressButton controls={controls} onPress={onPress} />
 
-        <div className="mt-10 text-center text-xs text-white/40">
-          this app is pointless. that’s why it’s powerful.
-        </div>
+          <div className="mt-8 lg:hidden">
+            <TopCountriesPanel
+              previewCountries={countriesPreview}
+              totalWithData={countries.length}
+              onOpenFull={() => setCountriesModalOpen(true)}
+            />
+          </div>
+        </section>
+
+        <aside className="hidden lg:block">
+          <div className="sticky top-4 ml-4">
+            <TopCountriesPanel
+              previewCountries={countriesPreview}
+              totalWithData={countries.length}
+              onOpenFull={() => setCountriesModalOpen(true)}
+            />
+          </div>
+        </aside>
       </div>
     </main>
   );

@@ -9,18 +9,18 @@ export function CounterHero({
 }) {
   return (
     <div className="mb-6 text-center">
-      <div className="text-[64px] leading-none font-semibold tracking-tight sm:text-[92px]">
+      <div className="text-[50px] leading-none font-semibold tracking-tight text-black sm:text-[72px] md:text-[92px]">
         {hasServerCount ? (
           displayedCount.toLocaleString()
         ) : (
-          <span className="text-white/50 tabular-nums">…</span>
+          <span className="text-slate-500 tabular-nums">…</span>
         )}
       </div>
-      <div className="mt-2 text-sm text-white/60">
+      <div className="mt-2 text-sm text-slate-600">
         {hasServerCount ? (
           <>
             your presses today:{' '}
-            <span className="text-white/80 font-medium tabular-nums">
+            <span className="font-medium text-black tabular-nums">
               {todayPresses.toLocaleString()}
             </span>
           </>

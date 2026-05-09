@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -11,19 +12,37 @@ export function PressButton({
   controls: ReturnType<typeof useAnimationControls>;
   onPress: () => void | Promise<void>;
 }) {
+  const enterLockRef = useRef(false);
+
   return (
     <div className="flex items-center justify-center">
       <motion.div animate={controls} className="select-none">
         <Button
           onClick={onPress}
+          onKeyDown={(event) => {
+            if (event.key !== 'Enter') return;
+            if (event.repeat || enterLockRef.current) {
+              event.preventDefault();
+              return;
+            }
+
+            enterLockRef.current = true;
+            event.preventDefault();
+            void onPress();
+          }}
+          onKeyUp={(event) => {
+            if (event.key === 'Enter') {
+              enterLockRef.current = false;
+            }
+          }}
           className={cn(
-            'h-28 w-[min(520px,92vw)] rounded-3xl text-2xl font-semibold',
-            'bg-white text-neutral-950 hover:bg-white/90',
-            'shadow-[0_30px_80px_-40px_rgba(255,255,255,0.25)]',
+            'h-[44px] w-[114px] rounded-[10px] px-0 text-[16px] leading-none font-normal tracking-normal',
+            'border border-[#707070] bg-[#e5e5e5] text-black hover:bg-[#e5e5e5]',
+            'shadow-none',
             'touch-manipulation'
           )}
         >
-          PRESS
+          Click me
         </Button>
       </motion.div>
     </div>

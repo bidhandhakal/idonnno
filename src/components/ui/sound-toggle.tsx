@@ -27,12 +27,12 @@ export function SoundToggle() {
       clickSound={false}
       onClick={toggle}
       aria-pressed={on}
-      className="h-8 gap-2 rounded-lg border-white/20 bg-neutral-950 px-3 text-white hover:bg-neutral-900 hover:text-white"
+      className="h-8 gap-2 rounded-lg border-slate-300 bg-white px-3 text-slate-700 hover:bg-slate-100 hover:text-slate-900"
     >
       {on ? (
-        <Volume2 className="size-4 text-white" aria-hidden />
+        <Volume2 className="size-4 text-slate-700" aria-hidden />
       ) : (
-        <VolumeX className="size-4 text-white" aria-hidden />
+        <VolumeX className="size-4 text-slate-700" aria-hidden />
       )}
       <span className="text-xs font-medium tracking-tight">
         {on ? 'sound on' : 'sound off'}

@@ -1,9 +1,6 @@
 import type { CountryStat } from './types';
-import {
-  countryCodeToDisplayName,
-  shouldShowCountryCodeSubtitle,
-} from './lib/country-display-name';
-import { countryCodeToFlagEmoji } from './lib/flag-emoji';
+import { countryCodeToDisplayName } from './lib/country-display-name';
+import { CountryFlag } from './country-flag';
 
 export function TopCountriesPanel({
   previewCountries,
@@ -23,54 +20,47 @@ export function TopCountriesPanel({
       type="button"
       disabled={empty}
       onClick={onOpenFull}
-      className="w-full rounded-2xl border border-white/10 bg-white/5 p-4 text-left transition-colors hover:border-white/20 hover:bg-white/[0.07] disabled:cursor-default disabled:opacity-100 disabled:hover:border-white/10 disabled:hover:bg-white/5"
+      className="w-full rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-colors hover:border-slate-300 hover:bg-slate-50 disabled:cursor-default disabled:opacity-100 disabled:hover:border-slate-200 disabled:hover:bg-white"
     >
       <div className="flex items-start justify-between gap-2">
-        <div className="text-xs tracking-widest text-white/60">
+        <div className="text-xs tracking-widest text-slate-600">
           TOP COUNTRIES
         </div>
         {!empty && (
-          <span className="shrink-0 text-[0.65rem] font-medium tracking-wide text-white/45">
+          <span className="shrink-0 text-[0.65rem] font-medium tracking-wide text-slate-500">
             tap for full list
           </span>
         )}
       </div>
       <div className="mt-3 space-y-2">
         {empty ? (
-          <div className="text-sm text-white/50">
+          <div className="text-sm text-slate-500">
             no nations have admitted guilt yet
           </div>
         ) : (
           <>
             {previewCountries.map((c) => {
               const name = countryCodeToDisplayName(c.country);
-              const showCode = shouldShowCountryCodeSubtitle(name, c.country);
               return (
                 <div
                   key={c.country}
                   className="flex items-center justify-between gap-2 text-sm"
                 >
-                  <div className="flex min-w-0 flex-1 items-center gap-2 font-medium text-white/85">
-                    <span className="text-lg leading-none" aria-hidden>
-                      {countryCodeToFlagEmoji(c.country)}
-                    </span>
-                    <span className="min-w-0 leading-tight">
-                      <span className="block truncate">{name}</span>
-                      {showCode && (
-                        <span className="block truncate text-xs font-normal text-white/45 tabular-nums">
-                          {c.country}
-                        </span>
-                      )}
-                    </span>
+                  <div className="flex min-w-0 flex-1 items-center gap-2 font-medium text-slate-900">
+                    <CountryFlag
+                      countryCode={c.country}
+                      className="h-3.5 w-[1.1rem]"
+                    />
+                    <span className="min-w-0 truncate">{name}</span>
                   </div>
-                  <div className="shrink-0 tabular-nums text-white/60">
+                  <div className="shrink-0 tabular-nums text-slate-600">
                     {c.count.toLocaleString()}
                   </div>
                 </div>
               );
             })}
             {showViewAllHint && (
-              <div className="pt-1 text-xs text-white/40">
+              <div className="pt-1 text-xs text-slate-500">
                 + {(totalWithData - previewCountries.length).toLocaleString()}{' '}
                 more in full list
               </div>
