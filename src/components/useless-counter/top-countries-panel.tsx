@@ -20,7 +20,7 @@ export function TopCountriesPanel({
       type="button"
       disabled={empty}
       onClick={onOpenFull}
-      className="w-full rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-colors hover:border-slate-300 hover:bg-slate-50 disabled:cursor-default disabled:opacity-100 disabled:hover:border-slate-200 disabled:hover:bg-white"
+      className="w-full rounded-2xl border border-slate-200 bg-white p-4 text-left disabled:cursor-default disabled:opacity-100"
     >
       <div className="flex items-start justify-between gap-2">
         <div className="text-xs tracking-widest text-slate-600">
@@ -39,21 +39,32 @@ export function TopCountriesPanel({
           </div>
         ) : (
           <>
-            {previewCountries.map((c) => {
+            {previewCountries.map((c, index) => {
               const name = countryCodeToDisplayName(c.country);
+              const rowClass =
+                index === 0
+                  ? 'bg-amber-200/70'
+                  : index === 1
+                    ? 'bg-slate-300/70'
+                    : index === 2
+                      ? 'bg-orange-200/70'
+                      : '';
               return (
                 <div
                   key={c.country}
-                  className="flex items-center justify-between gap-2 text-sm"
+                  className={`flex items-center justify-between gap-2 rounded-md px-2 py-1 text-sm ${rowClass}`}
                 >
-                  <div className="flex min-w-0 flex-1 items-center gap-2 font-medium text-slate-900">
+                  <div className="flex min-w-0 flex-1 items-center gap-2 font-medium text-black">
+                    <span className="w-6 shrink-0 tabular-nums text-black">
+                      #{index + 1}
+                    </span>
                     <CountryFlag
                       countryCode={c.country}
                       className="h-3.5 w-[1.1rem]"
                     />
                     <span className="min-w-0 truncate">{name}</span>
                   </div>
-                  <div className="shrink-0 tabular-nums text-slate-600">
+                  <div className="shrink-0 tabular-nums text-black">
                     {c.count.toLocaleString()}
                   </div>
                 </div>
