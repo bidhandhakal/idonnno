@@ -14,37 +14,32 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-const siteName = 'idonnno';
-const siteDescription =
-  'A global button counter where everyone can click, track presses, and see live country stats.';
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : 'https://idonno.com');
-const ogImageUrl = `${siteUrl}/og-image.png`;
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: siteName,
-  description: siteDescription,
+  metadataBase: new URL('https://idonnno.vercel.app'),
+  title: 'idonnno',
+  description:
+    'A global button counter where everyone can click, track presses, and see live country stats.',
   openGraph: {
-    title: siteName,
-    description: siteDescription,
-    url: siteUrl,
+    title: 'idonnno',
+    description:
+      'A global button counter where everyone can click, track presses, and see live country stats.',
+    url: 'https://idonnno.vercel.app',
     type: 'website',
     images: [
       {
-        url: ogImageUrl,
-        alt: `${siteName} preview image`,
+        url: 'https://idonnno.vercel.app/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'idonnno preview image',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: siteName,
-    description: siteDescription,
-    images: [ogImageUrl],
+    title: 'idonnno',
+    description:
+      'A global button counter where everyone can click, track presses, and see live country stats.',
+    images: ['https://idonnno.vercel.app/og-image.png'],
   },
 };
 
