@@ -12,7 +12,7 @@ export function CounterHeader({
   const countryName = countryCodeToDisplayName(country);
 
   return (
-    <div className="-mx-3 mb-5 flex flex-wrap items-start justify-between gap-4 border-b border-slate-200 px-3 pb-4 sm:-mx-5 sm:mb-6 sm:px-5">
+    <div className="-mx-6 mb-5 flex flex-wrap items-start justify-between gap-4 border-b border-slate-200 px-6 pb-4 sm:-mx-5 sm:mb-6 sm:px-5">
       <div>
         <div className="text-sm text-slate-700">
           <span className="text-slate-500">country:</span>{' '}
@@ -25,9 +25,15 @@ export function CounterHeader({
 
       <div className="ml-auto flex flex-col items-end gap-2 text-right text-xs text-slate-600">
         <SoundToggle />
-        <div>
-          <span className="text-slate-900">{onlineCount.toLocaleString()}</span>{' '}
-          humans online right now
+        <div className="inline-flex items-center gap-1.5">
+          <span
+            aria-hidden="true"
+            className="h-2 w-2 rounded-full bg-emerald-500"
+          />
+          <span>
+            <span className="text-slate-900">{onlineCount.toLocaleString()}</span>{' '}
+            humans online right now
+          </span>
         </div>
       </div>
     </div>

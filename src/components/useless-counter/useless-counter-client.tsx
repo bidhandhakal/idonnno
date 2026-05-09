@@ -124,7 +124,7 @@ export function UselessCounterClient({
       <div className="grid w-full max-w-[1260px] grid-cols-1 gap-4 lg:grid-cols-[260px_minmax(0,640px)_320px] lg:gap-0">
         <aside className="hidden lg:block" />
 
-        <section className="min-w-0 border-x border-slate-200 px-3 py-4 sm:px-5">
+        <section className="min-w-0 border-slate-200 px-3 py-4 sm:px-5 lg:border-x">
           <CounterHeader country={country} onlineCount={online?.count ?? 0} />
           <CounterHero
             hasServerCount={hasServerCount}

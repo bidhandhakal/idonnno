@@ -20,7 +20,7 @@ export function TopCountriesPanel({
       type="button"
       disabled={empty}
       onClick={onOpenFull}
-      className="w-full rounded-2xl border border-slate-200 bg-white p-4 text-left disabled:cursor-default disabled:opacity-100"
+      className="w-full rounded-xl border border-slate-200 bg-white p-4 text-left disabled:cursor-default disabled:opacity-100"
     >
       <div className="flex items-start justify-between gap-2">
         <div className="text-xs tracking-widest text-slate-600">
