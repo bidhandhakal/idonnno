@@ -13,7 +13,7 @@ export function SoundToggle() {
   const on = useSyncExternalStore(
     subscribeClickSoundPreference,
     isClickSoundEnabled,
-    () => true,
+    () => true
   );
 
   const toggle = useCallback(() => {

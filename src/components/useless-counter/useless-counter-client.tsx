@@ -4,12 +4,9 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useMutation, useQuery } from 'convex/react';
 import { useAnimationControls } from 'framer-motion';
 import { api } from '../../../convex/_generated/api';
-import { MILESTONES } from './constants';
-import { ConfettiBurst, makeConfettiPieces } from './confetti-burst';
 import { CounterHeader } from './counter-header';
 import { CounterHero } from './counter-hero';
-import { MilestoneModal } from './milestone-modal';
-import { MilestonesPanel } from './milestones-panel';
+
 import { PressButton } from './press-button';
 import { CountriesLeaderboardModal } from './countries-leaderboard-modal';
 import { TopCountriesPanel } from './top-countries-panel';
@@ -78,36 +75,12 @@ export function UselessCounterClient({
   const [milestoneOpen, setMilestoneOpen] = useState(false);
   const [milestoneValue, setMilestoneValue] = useState<number | null>(null);
   const [confettiPieces, setConfettiPieces] = useState<ConfettiPiece[] | null>(
-    null,
+    null
   );
   const lastMilestoneSeenRef = useRef<number>(0);
   const milestonePrimedRef = useRef(false);
 
-  useEffect(() => {
-    if (milestonePrimedRef.current) return;
-    if (!hasServerCount) return;
-    const reached = [...MILESTONES]
-      .reverse()
-      .find((m) => (serverCount ?? 0) >= m);
-    lastMilestoneSeenRef.current = reached ?? 0;
-    milestonePrimedRef.current = true;
-  }, [hasServerCount, serverCount]);
-
-  useEffect(() => {
-    if (!mountedRef.current) return;
-    if (!milestonePrimedRef.current) return;
-    for (const m of MILESTONES) {
-      if (displayedCount >= m && lastMilestoneSeenRef.current < m) {
-        lastMilestoneSeenRef.current = m;
-        setMilestoneValue(m);
-        setMilestoneOpen(true);
-        setConfettiPieces(makeConfettiPieces());
-        window.setTimeout(() => setConfettiPieces(null), 1200);
-        break;
-      }
-    }
-  }, [displayedCount]);
-
+  useEffect(() => {}, []);
   const controls = useAnimationControls();
 
   const onPress = async () => {
@@ -142,12 +115,6 @@ export function UselessCounterClient({
 
   return (
     <main className="relative flex flex-1 items-center justify-center px-4 py-10 select-none">
-      <ConfettiBurst pieces={confettiPieces} />
-      <MilestoneModal
-        open={milestoneOpen}
-        milestone={milestoneValue}
-        onClose={() => setMilestoneOpen(false)}
-      />
       <CountriesLeaderboardModal
         open={countriesModalOpen}
         countries={countries}
@@ -155,10 +122,7 @@ export function UselessCounterClient({
       />
 
       <div className="w-full max-w-3xl">
-        <CounterHeader
-          country={country}
-          onlineCount={online?.count ?? 0}
-        />
+        <CounterHeader country={country} onlineCount={online?.count ?? 0} />
         <CounterHero
           hasServerCount={hasServerCount}
           displayedCount={displayedCount}
@@ -172,7 +136,6 @@ export function UselessCounterClient({
             totalWithData={countries.length}
             onOpenFull={() => setCountriesModalOpen(true)}
           />
-          <MilestonesPanel displayedCount={displayedCount} />
         </div>
 
         <div className="mt-10 text-center text-xs text-white/40">

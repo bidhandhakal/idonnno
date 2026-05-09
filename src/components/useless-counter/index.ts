@@ -1,5 +1,4 @@
 export { UselessCounterClient } from './useless-counter-client';
-export { MILESTONES } from './constants';
 export type { ConfettiPiece, CountryStat } from './types';
 export { clampCountry } from './lib/country';
 export {
@@ -15,6 +14,3 @@ export { CounterHero } from './counter-hero';
 export { PressButton } from './press-button';
 export { TopCountriesPanel } from './top-countries-panel';
 export { CountriesLeaderboardModal } from './countries-leaderboard-modal';
-export { MilestonesPanel } from './milestones-panel';
-export { MilestoneModal } from './milestone-modal';
-export { ConfettiBurst, makeConfettiPieces } from './confetti-burst';
