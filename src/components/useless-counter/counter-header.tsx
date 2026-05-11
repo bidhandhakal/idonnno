@@ -31,8 +31,10 @@ export function CounterHeader({
             className="h-2 w-2 rounded-full bg-emerald-500"
           />
           <span>
-            <span className="text-slate-900">{onlineCount.toLocaleString()}</span>{' '}
-            humans online right now
+            <span className="text-slate-900">
+              {onlineCount.toLocaleString()}
+            </span>{' '}
+            people online right now
           </span>
         </div>
       </div>
