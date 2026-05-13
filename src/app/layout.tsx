@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist_Mono, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { Analytics } from '@vercel/analytics/react';
+import { SiteFooter } from '@/components/site-footer';
 import { ConvexClientProvider } from './convex-client-provider';
 
 const spaceGrotesk = Space_Grotesk({
@@ -54,7 +55,12 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className={`${spaceGrotesk.className} min-h-full flex flex-col`}>
-        <ConvexClientProvider>{children}</ConvexClientProvider>
+        <ConvexClientProvider>
+          <div className="flex min-h-full w-full flex-1 flex-col">
+            {children}
+            <SiteFooter />
+          </div>
+        </ConvexClientProvider>
         <Analytics />
       </body>
     </html>
