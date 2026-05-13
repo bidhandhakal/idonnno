@@ -61,4 +61,3 @@ export const incrementCounter = mutation({
     return { value: nextValue };
   },
 });
-

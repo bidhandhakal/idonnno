@@ -16,69 +16,82 @@ export function TopCountriesPanel({
   const showViewAllHint = !empty && totalWithData > previewCountries.length;
 
   return (
-    <button
-      type="button"
-      disabled={empty}
-      onClick={onOpenFull}
-      className="w-full rounded-xl border border-slate-200 bg-white p-4 text-left disabled:cursor-default disabled:opacity-100"
-    >
-      <div className="flex items-start justify-between gap-2">
-        <div className="text-xs tracking-widest text-slate-600">
-          TOP COUNTRIES
-        </div>
-        {!empty && (
-          <span className="shrink-0 text-[0.65rem] font-medium tracking-wide text-slate-500">
-            tap for full list
-          </span>
-        )}
-      </div>
-      <div className="mt-3 space-y-2">
-        {empty ? (
-          <div className="text-sm text-slate-500">
-            no nations have admitted guilt yet
+    <div className="w-full rounded-xl border border-slate-200 bg-white">
+      <button
+        type="button"
+        disabled={empty}
+        onClick={onOpenFull}
+        className="w-full rounded-t-xl p-4 text-left disabled:cursor-default disabled:opacity-100"
+      >
+        <div className="flex items-start justify-between gap-2">
+          <div className="text-xs tracking-widest text-slate-600">
+            TOP COUNTRIES
           </div>
-        ) : (
-          <>
-            {previewCountries.map((c, index) => {
-              const name = countryCodeToDisplayName(c.country);
-              const rowClass =
-                index === 0
-                  ? 'bg-amber-200/70'
-                  : index === 1
-                    ? 'bg-slate-300/70'
-                    : index === 2
-                      ? 'bg-orange-200/70'
-                      : '';
-              return (
-                <div
-                  key={c.country}
-                  className={`flex items-center justify-between gap-2 rounded-md px-2 py-1 text-sm ${rowClass}`}
-                >
-                  <div className="flex min-w-0 flex-1 items-center gap-2 font-medium text-black">
-                    <span className="w-6 shrink-0 tabular-nums text-black">
-                      #{index + 1}
-                    </span>
-                    <CountryFlag
-                      countryCode={c.country}
-                      className="h-3.5 w-[1.1rem]"
-                    />
-                    <span className="min-w-0 truncate">{name}</span>
+          {!empty && (
+            <span className="shrink-0 text-[0.65rem] font-medium tracking-wide text-slate-500">
+              tap for full list
+            </span>
+          )}
+        </div>
+        <div className="mt-3 space-y-2">
+          {empty ? (
+            <div className="text-sm text-slate-500">
+              no nations have admitted guilt yet
+            </div>
+          ) : (
+            <>
+              {previewCountries.map((c, index) => {
+                const name = countryCodeToDisplayName(c.country);
+                const rowClass =
+                  index === 0
+                    ? 'bg-amber-200/70'
+                    : index === 1
+                      ? 'bg-slate-300/70'
+                      : index === 2
+                        ? 'bg-orange-200/70'
+                        : '';
+                return (
+                  <div
+                    key={c.country}
+                    className={`flex items-center justify-between gap-2 rounded-md px-2 py-1 text-sm ${rowClass}`}
+                  >
+                    <div className="flex min-w-0 flex-1 items-center gap-2 font-medium text-black">
+                      <span className="w-6 shrink-0 tabular-nums text-black">
+                        #{index + 1}
+                      </span>
+                      <CountryFlag
+                        countryCode={c.country}
+                        className="h-3.5 w-[1.1rem]"
+                      />
+                      <span className="min-w-0 truncate">{name}</span>
+                    </div>
+                    <div className="shrink-0 tabular-nums text-black">
+                      {c.count.toLocaleString()}
+                    </div>
                   </div>
-                  <div className="shrink-0 tabular-nums text-black">
-                    {c.count.toLocaleString()}
-                  </div>
+                );
+              })}
+              {showViewAllHint && (
+                <div className="pt-1 text-xs text-slate-500">
+                  + {(totalWithData - previewCountries.length).toLocaleString()}{' '}
+                  more in full list
                 </div>
-              );
-            })}
-            {showViewAllHint && (
-              <div className="pt-1 text-xs text-slate-500">
-                + {(totalWithData - previewCountries.length).toLocaleString()}{' '}
-                more in full list
-              </div>
-            )}
-          </>
-        )}
+              )}
+            </>
+          )}
+        </div>
+      </button>
+
+      <div className="border-t border-slate-200 px-4 py-3 text-xs text-slate-500">
+        <a
+          href="https://x.com/bidhaan_daju"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-slate-600 underline-offset-2 transition-colors hover:text-slate-900 hover:underline"
+        >
+          DM me on Twitter to reset the counter
+        </a>
       </div>
-    </button>
+    </div>
   );
 }
