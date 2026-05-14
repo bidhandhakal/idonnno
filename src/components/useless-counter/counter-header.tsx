@@ -1,3 +1,4 @@
+import { RulesDropdown } from '@/components/ui/rules-dropdown';
 import { SoundToggle } from '@/components/ui/sound-toggle';
 import { countryCodeToDisplayName } from './lib/country-display-name';
 import { CountryFlag } from './country-flag';
@@ -24,7 +25,10 @@ export function CounterHeader({
       </div>
 
       <div className="ml-auto flex flex-col items-end gap-2 text-right text-xs text-slate-600">
-        <SoundToggle />
+        <div className="flex flex-wrap items-center justify-end gap-2">
+          <RulesDropdown />
+          <SoundToggle />
+        </div>
         <div className="inline-flex items-center gap-1.5">
           <span
             aria-hidden="true"
