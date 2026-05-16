@@ -1,8 +1,8 @@
 import { Coffee } from 'lucide-react';
 import { supportLinks } from '@/lib/support-links';
 
-const donateButtonClass =
-  'inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50';
+const linkClass =
+  'flex w-full items-center gap-2.5 rounded-md border border-slate-200 px-3 py-2.5 text-sm text-slate-800 transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 focus-visible:ring-offset-2';
 
 function KoFiIcon({ className }: { className?: string }) {
   return (
@@ -11,8 +11,8 @@ function KoFiIcon({ className }: { className?: string }) {
       src="https://storage.ko-fi.com/cdn/cup-border.png"
       alt=""
       className={className}
-      width={14}
-      height={14}
+      width={16}
+      height={16}
     />
   );
 }
@@ -20,28 +20,39 @@ function KoFiIcon({ className }: { className?: string }) {
 export function DonateButtons() {
   return (
     <div
-      className="flex flex-wrap items-center justify-center gap-2"
-      role="group"
-      aria-label="Support the creator"
+      className="w-full rounded-xl border border-slate-200 bg-white p-4"
+      aria-labelledby="support-heading"
     >
-      <a
-        href={supportLinks.kofi}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`${donateButtonClass} border-[#ff5e5b]/35 bg-[#ff5e5b]/10 text-[#d94a47] hover:border-[#ff5e5b]/55 hover:bg-[#ff5e5b]/18`}
+      <p
+        id="support-heading"
+        className="text-xs tracking-widest text-slate-600"
       >
-        <KoFiIcon className="size-3.5" />
-        Ko-fi
-      </a>
-      <a
-        href={supportLinks.buyMeACoffee}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`${donateButtonClass} border-[#e6c200]/50 bg-[#ffdd00]/25 text-[#5c4a00] hover:border-[#d4b000]/70 hover:bg-[#ffdd00]/40`}
-      >
-        <Coffee className="size-3.5" strokeWidth={2.25} />
-        Buy me a coffee
-      </a>
+        SUPPORT
+      </p>
+      <p className="mt-2 text-sm leading-snug text-slate-600">
+        Enjoying the counter? Buy us a coffee.
+      </p>
+
+      <div className="mt-3 space-y-2" role="group" aria-label="Donate options">
+        <a
+          href={supportLinks.kofi}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={linkClass}
+        >
+          <KoFiIcon className="size-4 shrink-0" />
+          <span>Ko-fi</span>
+        </a>
+        <a
+          href={supportLinks.buyMeACoffee}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={linkClass}
+        >
+          <Coffee className="size-4 shrink-0 text-slate-600" strokeWidth={2} />
+          <span>Buy me a coffee</span>
+        </a>
+      </div>
     </div>
   );
 }

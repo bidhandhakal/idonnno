@@ -1,4 +1,3 @@
-import { DonateButtons } from '@/components/donate-buttons';
 import { supportLinks } from '@/lib/support-links';
 
 export function SiteFooter() {
@@ -7,8 +6,7 @@ export function SiteFooter() {
       <div className="flex justify-center px-3 sm:px-5 lg:px-6">
         <div className="grid w-full max-w-[1260px] grid-cols-1 gap-4 lg:grid-cols-[260px_minmax(0,640px)_320px] lg:gap-0">
           <div className="hidden lg:block" aria-hidden />
-          <div className="flex flex-col items-center gap-2.5 text-center">
-            <DonateButtons />
+          <div className="text-center">
             <a
               href={supportLinks.twitter}
               target="_blank"

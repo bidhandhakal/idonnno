@@ -7,6 +7,7 @@ import { api } from '../../../convex/_generated/api';
 import { CounterHeader } from './counter-header';
 import { CounterHero } from './counter-hero';
 
+import { DonateButtons } from '@/components/donate-buttons';
 import { PressButton } from './press-button';
 import { CountriesLeaderboardModal } from './countries-leaderboard-modal';
 import { TopCountriesPanel } from './top-countries-panel';
@@ -122,7 +123,7 @@ export function UselessCounterClient({
       />
 
       <div className="grid w-full max-w-[1260px] grid-cols-1 gap-4 lg:grid-cols-[260px_minmax(0,640px)_320px] lg:gap-0">
-        <aside className="hidden lg:block" />
+        <aside className="hidden lg:block" aria-hidden />
 
         <section className="min-w-0 border-slate-200 px-3 py-4 sm:px-5 lg:border-x">
           <CounterHeader country={country} onlineCount={online?.count ?? 0} />
@@ -133,22 +134,24 @@ export function UselessCounterClient({
           />
           <PressButton controls={controls} onPress={onPress} />
 
-          <div className="mt-8 lg:hidden">
+          <div className="mt-8 space-y-4 lg:hidden">
             <TopCountriesPanel
               previewCountries={countriesPreview}
               totalWithData={countries.length}
               onOpenFull={() => setCountriesModalOpen(true)}
             />
+            <DonateButtons />
           </div>
         </section>
 
         <aside className="hidden lg:block">
-          <div className="sticky top-4 ml-4">
+          <div className="sticky top-4 ml-4 space-y-4">
             <TopCountriesPanel
               previewCountries={countriesPreview}
               totalWithData={countries.length}
               onOpenFull={() => setCountriesModalOpen(true)}
             />
+            <DonateButtons />
           </div>
         </aside>
       </div>
